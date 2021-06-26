@@ -17,7 +17,7 @@ p {
 /* containers */
 .container-fluid {
   /*personalizing bootstrap's class */
-  padding: 7% 15%;
+  padding: 2% 15%;
 }
 
 
@@ -34,12 +34,12 @@ p {
 
 /*sections */
 .coloured-section{
-  background-color: #ffd5cd;
+  background-color: #CAE4DB;
   color: #808080;
 }
 
 .white-section{
-  background-color: white;
+  background-color: #F5F4F4;
 }
 
 /* title section */
@@ -86,12 +86,12 @@ p {
 }
 
 .title-image {
-  width: 57%;
+  width: 100%;
   padding-left: 20px;
-  margin: 20px;
-  transform: rotate(25deg);
-  position: absolute;
-  right: 20%;
+  /* margin: 20px; */
+  /* transform: rotate(25deg); */
+  /* position: absolute; */
+  /* right: 20%; */
 }
 
 @media (max-width: 1080px) {
@@ -123,13 +123,13 @@ p {
 
 /* images for features */
 .feature-image {
-  color: #ffd5cd;
+  color: #CAE4DB;
   width: 100%;
   padding: 10%;
 }
 
 .feature-image:hover {
-  color: #efbbcf;
+  color: #CDAC81;
 }
 
 /* testimonial section */
@@ -188,7 +188,7 @@ p {
 
 /* footer */
 #footer {
-  background-color: white;
+  /* background-color: white; */
   padding: 2.5% 15% 1% 15%;
 }
 
