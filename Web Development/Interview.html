@@ -22,53 +22,14 @@
 </head>
 
 <body>
-  <section class="coloured-section" id="title">
-
-    <div class="container-fluid">
-
-      <!-- Nav Bar -->
-
-      <nav class="navbar navbar-expand-lg navbar-light">
-
-        <a class="navbar-brand" href ""><b>Interview Buddy</b></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="Interview.html">Interview Prep</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="FAQ.html">FAQ</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-
-      <!-- Title -->
-      <div class="row" style="width: 100%;">
-        <div class="col-lg-6">
-          <h1 class="big-heading">Preparing for interviews has never been easier.</h1>
-          <a class="btn btn-dark btn-lg download-btn" href="Interview.html" role="button"><i class="fas fa-laptop"></i> Start Now</a>
-          <a class="btn btn-dark btn-lg download-btn" href="about.html" role="button"><i class="fas fa-question"></i> Learn More</a>
-        </div>
-        <div class="col-lg-6" style="padding-left: 20px;">
-          <img class="title-image" src="images/test.png" alt="laptop-mockup">
-        </div>
-      </div>
-
-    </div>
-  </section>
-
+  <h1>"interview page"</h1>
+  
+  <button id="start-camera">Start Camera</button>
+  <video id="video" width="500" height="400" autoplay muted></video>
+  <button id="start-record">Start Recording</button>
+  <button id="stop-record">Stop Recording (and turn off video)</button>
+  <a id="download-video" download="recording.webm">Download Video</a>
+  <script src="scripts/test.js"></script>
 </body>
 
 </html>
