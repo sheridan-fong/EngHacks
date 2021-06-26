@@ -1,2 +1,4 @@
 opencv_python
 cmake
+scikit-learn
+numpy

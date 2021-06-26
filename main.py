@@ -52,3 +52,40 @@ def focus_score(filepath):
             break
 
     focus_score = centered_reads/number_of_frames
+
+def context_score(saved_response_filepath, input_response_filepath):
+#Accepts two txt files containing one or more response
+    
+    import numpy as np
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.metrics.pairwise import cosine_similarity
+
+    saved = []
+    answers = []
+
+    with open(saved_response_filepath, 'r') as file:
+        lines = file.readlines()
+        for line in lines:
+            saved.append(line)
+        
+
+    with open(input_response_filepath, 'r') as file:
+        lines = file.readlines()
+        for line in lines:
+            answers.append(line)
+
+    tfidf = TfidfVectorizer(
+        input='content',
+        strip_accents='ascii',
+        lowercase='True',
+        stop_words='english',
+        max_features = 50)
+
+    
+    saved_matrix = tfidf.fit_transform(saved)
+    answer_matrix = tfidf.transform(answers)
+
+    cosine_sim = cosine_similarity(answer_matrix, saved_matrix)
+
+    return 100*np.max(cosine_sim)
+
