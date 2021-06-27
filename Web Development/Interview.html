@@ -79,53 +79,58 @@
     padding-bottom: 5%;">
       <h2 class="section-heading">Choose your Interview Deck</h2>
 
-        <!-- Your name -->
-        <div class="form-group" data-errormsg="">
-          <label for="exampleFormControlTextarea1">Your Name</label>
-          <textarea type="text" name="health_num" class="form-control" id="exampleFormControlTextarea1" placeholder="William McMaster" rows="1"></textarea>
-        </div>
+      <!-- Your name -->
+      <div class="form-group" data-errormsg="">
+        <label for="exampleFormControlTextarea1">Your Name</label>
+        <textarea type="text" name="health_num" class="form-control" id="exampleFormControlTextarea1" placeholder="William McMaster" rows="1"></textarea>
+      </div>
 
-        <!-- Emial -->
-        <div class="form-group" data-errormsg="">
-          <label for="exampleFormControlTextarea1">Email</label>
-          <textarea type="Email" name="health_num" class="form-control" id="exampleFormControlTextarea1" placeholder="william.mcmaster@mcmaster.ca" rows="1"></textarea>
-        </div>
+      <!-- Emial -->
+      <div class="form-group" data-errormsg="">
+        <label for="emailField">Email</label>
+        <textarea type="Email" name="health_num" class="form-control" id="exampleFormControlTextarea1" placeholder="william.mcmaster@mcmaster.ca" rows="1"></textarea>
+      </div>
 
-        <!-- Category -->
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Interview Question Deck</label>
-          <select name="category" class="form-control" id="exampleFormControlSelect1">
-            <option>General Interview Questions</option>
-            <option>Situational Questions</option>
-            <option>Coding Technical Questions</option>
-            <option>Financial Technical Questions</option>
-          </select>
-        </div>
+      <!-- Category -->
+      <div class="form-group">
+        <label for="select-deck">Interview Question Deck</label>
+        <select name="category" class="form-control" id="exampleFormControlSelect1">
+          <option>General Interview Questions</option>
+          <option>Situational Questions</option>
+          <option>Coding Technical Questions</option>
+          <option>Financial Technical Questions</option>
+        </select>
+      </div>
 
-        <!-- Checking to see if the person agrees to submitting correct info -->
-        <div class="form-box" data-errormsg="">
-          <label for="input-alive">I allow Interview Buddy to processing my audio and video.</label>
-          <input type="checkbox" id="input-alive" value="yes" tabindex="5" />
-        </div>
+      <!-- Checking to see if the person agrees to submitting correct info -->
+      <div class="form-box" data-errormsg="">
+        <label for="input-alive">I allow Interview Buddy to process my audio and video.</label>
+        <input type="checkbox" id="input-alive" value="yes" tabindex="5" />
+      </div>
 
-        <div class="form-box">
-          <button class="btn btn-dark" id="button-cancel">Cancel</button>
+      <div class="form-box">
+        <button class="btn btn-dark" id="button-cancel">Cancel</button>
 
-          <!-- Pop-up button for confirmation -->
-          <script type='text/javascript'>
-            function foo() {
-              var user_choice = window.confirm('Are you okay with submitting your question?');
-              if (user_choice == true) {
-                window.location = 'Interview_Video.html'; // you can also use element.submit() if your input type='submit'
-              } else {
-                return false;
-              }
+        <!-- Pop-up button for confirmation -->
+        <script type='text/javascript'>
+          const isValidEmail = emailField.checkValidity()
+
+        // This javascript isn't really working
+          function foo() {
+            var user_choice = window.confirm('Are you okay with submitting your question?');
+            if (user_choice == true) {
+              window.location = 'Interview_Video.html'; // you can also use element.submit() if your input type='submit'
+            } else {
+              window.alert("Please Enter all information")
             }
-          </script>
+          }
 
-          <input type="button" class="btn btn-outline-primary" id="button-send" onClick="foo()" value="Submit" href="testing.html">
 
-        </div>
+        </script>
+
+        <input type="button" class="btn btn-outline-primary" id="button-send" onClick="foo()" value="Submit" href="testing.html">
+
+      </div>
 
     </div>
   </section>
