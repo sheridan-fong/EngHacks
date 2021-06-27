@@ -197,14 +197,16 @@ def context_score(uuid):
     input_filepath = os.getcwd() + fr'\data\WAV\{uuid}.wav'
 
     current_question_filepath = os.getcwd() + fr'\data\current_question.txt'
+    question_csv_filepath = os.getcwd() + fr'\data\question_matrix.csv'
 
-    current_question = ""
+    question_series = pd.read_csv(question_csv_filepath, squeeze=True, index_col = 0, header = 0)
+    
+    current_question = ''
+    with open(current_question_filepath, 'r') as index_file:
+        current_question = index_file.readlines()[1]
 
-    saved_response_filepath = current_question_filepath
+    responses_filepath = os.getcwd() + question_series[current_question]
 
-
-    with open(current_question_filepath, 'r') as question_file:
-        current_question = question_file.readlines()[1]
 
         
 
@@ -217,9 +219,9 @@ def context_score(uuid):
     result = recognizer.recognize_google(audio_file)
 
     saved = []
-    answers = result
+    answers = [r'{}'.format(result)]
 
-    with open(saved_response_filepath, 'r') as file:
+    with open(responses_filepath, 'r') as file:
         lines = file.readlines()
         for line in lines:
             saved.append(line)
