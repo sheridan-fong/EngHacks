@@ -60,7 +60,7 @@ def focus_score(uuid, input_filepath):
             break
 
     focus_score = centered_reads/number_of_frames
-<<<<<<< HEAD
+
     return {"Focus": focus_score}
 
 
