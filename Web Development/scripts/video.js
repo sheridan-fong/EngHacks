@@ -88,7 +88,7 @@ app_question.appendChild(question)
 function clickedButton(){
     alert("You button was pressed");
     var client = new HttpClient();
-    client.get('http://some/thing?with=arguments', function(response) {
+    client.get('http://localhost:8000/api/question/', function(response) {
       // the data is in "response"
       var response_parsed = JSON.parse(response)
 

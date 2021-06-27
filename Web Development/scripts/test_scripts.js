@@ -1,32 +1,30 @@
-// // given a JSON
-// var info = '[{"Name":"Sheridan Fong","Contact":12345678,"Age":17},{"Name":"Benjamin Sun","Contact":911,"Age":21}]'
-//
-// var question = '{"question":"How old are you?"}'
-//
-//
-// // Begin accessing JSON data here
-// var data = JSON.parse(info)
-//
-// console.log(data)
-// console.log(data[0]["Name"])
-//
-// const app = document.getElementById('root')
-//
-// console.log(app)
-//
-// const Name = document.createElement('h1')
-// Name.textContent = data[0]["Name"]
-//
-// const Age = document.createElement('p')
-// Age.textContent = data[0]["Age"]
-//
-// app.appendChild(Name)
-// app.appendChild(Age)
+// HTPPS client functions
 
+var HttpClient = function() {
+    this.get = function(aUrl, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() {
+            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                aCallback(anHttpRequest.responseText);
+        }
+
+        anHttpRequest.open( "GET", aUrl, true );
+        anHttpRequest.send( null );
+    }
+}
+
+// enter in link here
+var client = new HttpClient();
+client.get('http://some/thing?with=arguments', function(response) {
+    alert("made it here!")
+});
+
+
+// Grabbing the data and outputting it to the screen
 
 var sample = '{"focus_score":20, "focus_feedback":"Strong","content_score":35,"content_feedback": "STUFF", "audio_score":49,"audio_feedback":"THIS ONE MIGHT NOT WORK LMAO"}'
 
-var data_test = JSON.parse(sample)
+var data_test = JSON.parse(response) // prior was sample (response should be where the current json data is)
 
 console.log(data_test)
 
