@@ -203,7 +203,7 @@ def context_score(uuid):
     
     current_question = ''
     with open(current_question_filepath, 'r') as index_file:
-        current_question = index_file.readlines()[1]
+        current_question = index_file.readlines()[0]
 
     responses_filepath = os.getcwd() + question_series[current_question]
 
