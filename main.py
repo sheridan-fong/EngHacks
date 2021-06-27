@@ -2,6 +2,7 @@ import cv2
 from gaze_tracking import GazeTracking
 from utils.FFMConverter import FFMConverter
 import os
+import wave
 
 
 def get_uuid(uuid_filepath):
@@ -11,10 +12,10 @@ def get_uuid(uuid_filepath):
 
 def focus_score(uuid):
 
-    output_filepath = fr"C:\Users\bsun7\Desktop\EngHack\COMRADE\data_out\tester.mp4"
+    output_filepath = fr"C:\Users\bsun7\Desktop\EngHack\COMRADE\data_out\{uuid}.mp4"
 
-    
-    input_filepath = os.getcwd() + fr'\data\WEBM\{uuid}.webm'
+
+    input_filepath = r'C:\Users\bsun7\Desktop\EngHack\COMRADE' + fr'\data\WEBM\{uuid}.webm'
 
     #Convert webm file to mp4
     ffm = FFMConverter()
@@ -69,7 +70,7 @@ def focus_score(uuid):
         if cv2.waitKey(1) == 27:
             break
 
-    focus_score = centered_reads/number_of_frames
+    focus_score = centered_reads/number_of_frames *10
     focus_string = ""
     if focus_score > 10:
         focus_string = 'Nice! Your focus is great, keep it up!'
@@ -87,8 +88,8 @@ def focus_score(uuid):
 
 def speech_score(uuid):
     mysp = __import__('my-voice-analysis')
-    
-    cwd = os.getcwd()
+
+    cwd = r'C:\Users\bsun7\Desktop\EngHack\COMRADE'
     input_filepath = cwd + fr'\data_out\{uuid}.mp4'
     output_filepath = cwd + fr'\data\WAV\{uuid}.wav'
 
@@ -107,20 +108,23 @@ def speech_score(uuid):
                 file.setsampwidth(2)
                 file.setframerate(41000)
 
-    '''           
+    '''
     ffm.convert_to_wav(input_filepath, output_filepath)
 
-    p = uuid
+    p = fr'{uuid}'
     c = cwd + fr'\data\WAV'
 
     rating = mysp.myspgend(p,c)
 
     pauses = mysp.mysppaus(p,c)
+
     speed = mysp.myspsr(p,c)
+
     articulation = mysp.myspatc(p,c)
 
+
     pronounce = mysp.mysppron(p,c)
-    
+
     pauses_response = []
     speed_response = []
     articulation_response = []
@@ -180,35 +184,37 @@ def speech_score(uuid):
 
     feedback_statement = 'Feedback for Speed: ' + speed_response[1] + ' Feedback for Articulation: ' + articulation_response[1] + ', Feedback for Pausing: ' + pauses_response[1] + ', Pronounce Rating (out of 100): ' + str(pronounce)
 
-    
+
     return {'audio_score': mean_percent, 'audio_feedback': feedback_statement}
-    
+
+
 
 
 def context_score(uuid):
 #Accepts two txt files containing one or more response
-    
+
     import numpy as np
     import pandas as pd
     from sklearn.feature_extraction.text import TfidfVectorizer
     from sklearn.metrics.pairwise import cosine_similarity
     import speech_recognition as sr
 
-    input_filepath = os.getcwd() + fr'\data\WAV\{uuid}.wav'
+    input_filepath = r'C:\Users\bsun7\Desktop\EngHack\COMRADE' + fr'\data\WAV\{uuid}.wav'
 
-    current_question_filepath = os.getcwd() + fr'\data\current_question.txt'
-    question_csv_filepath = os.getcwd() + fr'\data\question_matrix.csv'
+    current_question_filepath = r'C:\Users\bsun7\Desktop\EngHack\COMRADE' + fr'\data\current_question.txt'
+    question_csv_filepath = r'C:\Users\bsun7\Desktop\EngHack\COMRADE' + fr'\data\question_matrix.csv'
 
     question_series = pd.read_csv(question_csv_filepath, squeeze=True, index_col = 0, header = 0)
-    
+
     current_question = ''
     with open(current_question_filepath, 'r') as index_file:
-        current_question = index_file.readlines()[0]
 
-    responses_filepath = os.getcwd() + question_series[current_question]
+        current_question = index_file.readlines()[0].rstrip("\n")
+
+    responses_filepath = r"C:\Users\bsun7\Desktop\EngHack\COMRADE\data" + question_series[current_question]
 
 
-        
+
 
     recognizer = sr.Recognizer()
     audio_clip = sr.AudioFile("{}".format(input_filepath))
@@ -225,8 +231,8 @@ def context_score(uuid):
         lines = file.readlines()
         for line in lines:
             saved.append(line)
-        
-    
+
+
 
     tfidf = TfidfVectorizer(
         input='content',
@@ -235,7 +241,7 @@ def context_score(uuid):
         stop_words='english',
         max_features = 50)
 
-    
+
     saved_matrix = tfidf.fit_transform(saved)
     answer_matrix = tfidf.transform(answers)
 
@@ -243,12 +249,12 @@ def context_score(uuid):
 
     max_cosine_sim = cosine_sim.max()
 
-    se = pd.Series(a.todense().tolist()[0], index=tfidf.get_feature_names())
+    se = pd.Series(answer_matrix.todense().tolist()[0], index=tfidf.get_feature_names())
 
     largest = [k for k,v in se.nlargest().to_dict().items() if v > 0]
     smallest = [k for k,v in se.nsmallest().to_dict().items() if v == 0]
 
-    
+
     score_list = 'Great job using these words: '
 
     for item in (largest):
@@ -264,7 +270,7 @@ def context_score(uuid):
         else:
             score_list += (item + ', ')
 
-    percentage = round(200*max_cosine, 2)
+    percentage = round(200*max_cosine_sim, 2)
     if percentage > 100:
         percentage = 100
 
@@ -272,7 +278,7 @@ def context_score(uuid):
     return {'content_score':percentage, 'content_feedback':score_list}
 
 
-uuid_filepath = os.getcwd() + fr'\data\current_question.txt'
+uuid_filepath = r'C:\Users\bsun7\Desktop\EngHack\COMRADE\data\current_question.txt'
 uuid = get_uuid(uuid_filepath)
 
 
@@ -287,5 +293,5 @@ json_dict.update(speech_dict)
 context_dict = context_score(uuid)
 json_dict.update(context_dict)
 
-print(json_dict)
+print("\n\n\n\n\n\n\n\n", json_dict)
 

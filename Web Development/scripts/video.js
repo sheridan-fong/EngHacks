@@ -71,7 +71,7 @@ submit.addEventListener('click', function() {
 });
 
 // adding in the specific question ------------------------------------------
-var sample = '{"question":"This is the question"}'
+var sample = '{"question":"Tell me about yourself."}'
 
 var data_test = JSON.parse(sample)
 
@@ -82,11 +82,10 @@ const app_question = document.getElementById('question_here')
 const question = document.createElement('h1')
 question.textContent = data_test["question"]
 
-app_question.appendChild(question)
 
 // adding in the button click function ----------------------------------
 function clickedButton(){
-    alert("You button was pressed");
+    alert("Loading question");
     var client = new HttpClient();
     client.get('http://localhost:8000/api/question/', function(response) {
       // the data is in "response"
@@ -100,11 +99,15 @@ function clickedButton(){
 
       // generating first met_node_replacechild
       var first_node = document.getElementById('question_here').childNodes[0];
+      console.log(response)
+      console.log(generated_question)
 
-      first_node.replaceChild(generated_question, first_node.childNodes[0]);
+      app_question.appendChild(question)
+    //   app_question.appendChild(response)
+
+       first_node.replaceChild(generated_question, first_node.childNodes[0]);
 
 
-      alert("get request done")
   });
 };
 

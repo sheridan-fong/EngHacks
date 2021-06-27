@@ -73,7 +73,9 @@ class Results(viewsets.ViewSet):
             def __init__(self, metrics):
                 self.results = metrics
 
-        scores = subprocess.Popen(["powershell.exe", ], stdout=sys.stdout)
+        scores = subprocess.run(r"powershell.exe python 'C:\Users\bsun7\Desktop\EngHack\COMRADE\main.py'", stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 
-        scores.communicate()
+        results = ResultFormatter(scores.stdout)
+        serializer = ResultSerializer(results.results)
+        return Response(serializer.data)
 
