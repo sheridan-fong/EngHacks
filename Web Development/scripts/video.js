@@ -89,6 +89,21 @@ function clickedButton(){
     alert("You button was pressed");
     var client = new HttpClient();
     client.get('http://some/thing?with=arguments', function(response) {
+      // the data is in "response"
+      var response_parsed = JSON.parse(response)
+
+      // going to have to replace old child with new child
+      // https://www.w3schools.com/XML/met_node_replacechild.asp
+      // https://www.w3schools.com/jsref/met_node_replacechild.asp
+      const generated_question = document.createElement('h1')
+      generated_question.textContent = data_test["question"]
+
+      // generating first met_node_replacechild
+      var first_node = document.getElementById('question_here').childNodes[0];
+
+      first_node.replaceChild(generated_question, first_node.childNodes[0]);
+
+
       alert("get request done")
   });
 };
@@ -107,3 +122,6 @@ var HttpClient = function() {
         anHttpRequest.send( null );
     }
 }
+
+
+// alternative way https://zetcode.com/javascript/jsonurl/
