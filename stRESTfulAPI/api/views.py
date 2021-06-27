@@ -8,9 +8,12 @@ from api.serializers import FileSerializer, QuestionSerializer
 from rest_framework import viewsets
 from uuid import uuid4
 import random
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import AllowAny
+import subprocess, sys
 
 
-
+@permission_classes([AllowAny])
 class FileUploadViewSet(viewsets.ViewSet):
 
 
@@ -19,44 +22,58 @@ class FileUploadViewSet(viewsets.ViewSet):
         if 'video' not in request.FILES or not serializer_class.is_valid():
             return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
-            handle_uploaded_file(request.FILES.getlist('video'))
+            handle_uploaded_file(request.FILES['video'])
             return Response(status=status.HTTP_201_CREATED)
 
 def handle_uploaded_file(f):
-    for x in f:
-        uuid = uuid4().__str__()
-        x.name = f"{uuid}.webm"
-        with open(fr"C:\Users\bsun7\Desktop\EngHack\COMRADE\data\WEBM\{x.name}", 'wb+') as destination:
+    with open(r'C:\Users\bsun7\Desktop\EngHack\COMRADE\data\current_question.txt', 'r') as file:
+        uuid = file.readlines()[1]
+
+    f.name = f"{uuid}.webm"
+    with open(fr"C:\Users\bsun7\Desktop\EngHack\COMRADE\data\WEBM\{f.name}", 'wb+') as destination:
             #Using a for-loop instead of read() ensures that large files don't
             #overwhelm system memory
-            for chunk in x.chunks():
-                destination.write(chunk)
+        for chunk in f.chunks():
+            destination.write(chunk)
 
 
+@permission_classes([AllowAny])
 class QuestionRandomizer(viewsets.ViewSet):
 
 
 
     def list(self, request):
         class QuestionFormatter:
-            def __init__(self, selected_question):
+            def __init__(self, selected_question, id):
                 self.question = selected_question
-
+                self.uuid = id
 
         questions = []
         with open(r'C:\Users\bsun7\Desktop\EngHack\COMRADE\data\questions.txt', 'r') as file:
             questions = [line for line in file.readlines()]
 
-
+        uuid = uuid4().__str__()
         selection = random.choice(questions)
-        selection = QuestionFormatter(selected_question=selection)
+        selection = QuestionFormatter(selected_question=selection, id=uuid)
+
         serializer = QuestionSerializer(selection)
 
-        ### write current question to a txt so we can keep track of the current question ??
-
-        with open(r'C:\Users\bsun7\Desktop\EngHack\COMRADE\data\current_question.txt', 'wb+') as tmp:
+        with open(r'C:\Users\bsun7\Desktop\EngHack\COMRADE\data\current_question.txt', 'w') as tmp:
             tmp.write(selection.question)
+            tmp.write(selection.uuid)
 
         return Response(serializer.data)
 
+
+@permission_classes([AllowAny])
+class Results(viewsets.ViewSet):
+
+    def list(self, request):
+        class ResultFormatter:
+            def __init__(self, metrics):
+                self.results = metrics
+
+        scores = subprocess.Popen(["powershell.exe", ], stdout=sys.stdout)
+
+        scores.communicate()
 

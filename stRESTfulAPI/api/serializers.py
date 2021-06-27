@@ -10,3 +10,7 @@ class FileSerializer(serializers.Serializer):
 
 class QuestionSerializer(serializers.Serializer):
     question = serializers.CharField(max_length=None, allow_blank=False, trim_whitespace=True)
+    uuid = serializers.CharField(max_length=None, allow_blank=False, trim_whitespace=True)
+
+class QuestionSerializer(serializers.Serializer):
+    results = serializers.CharField(max_length=None, allow_blank=False, trim_whitespace=True)

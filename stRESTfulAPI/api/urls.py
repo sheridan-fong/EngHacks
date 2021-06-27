@@ -6,6 +6,7 @@ router = routers.DefaultRouter()
 router.register(r'upload/file', views.FileUploadViewSet, basename='file')
 router.register(r'question', views.QuestionRandomizer, basename='question')
 
+
 urlpatterns = [
 	path('api/', include(router.urls)),
 ]

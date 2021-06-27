@@ -6,7 +6,7 @@ import os
 
 def get_uuid(uuid_filepath):
     with open(uuid_filepath, 'r') as uuid_file:
-        return uuid_file.readlines()[0]
+        return uuid_file.readlines()[1]
 
 
 def focus_score(uuid):
@@ -80,7 +80,7 @@ def focus_score(uuid):
     else:
         focus_string = "Poor Focus. Spend more time looking and engaging with the camera then your surroundings"
 
-    return {"focus_score": focus_score, focus_feedback:focus_string}
+    return {"focus_score": focus_score, "focus_feedback":focus_string}
 
 
 
