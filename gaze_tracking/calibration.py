@@ -16,7 +16,7 @@ class Calibration(object):
 
     def is_complete(self):
         """Returns true if the calibration is completed"""
-        print(len(self.thresholds_left) >= self.nb_frames and len(self.thresholds_right) >= self.nb_frames)
+
         return len(self.thresholds_left) >= self.nb_frames and len(self.thresholds_right) >= self.nb_frames
 
     def threshold(self, side):

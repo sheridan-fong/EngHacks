@@ -1,5 +1,6 @@
 opencv_python
 cmake
+ffmpeg-python
 scikit-learn
 numpy
 SpeechRecognition
