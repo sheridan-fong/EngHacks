@@ -21,15 +21,115 @@
 
 </head>
 
-<body>
-  <h1>"interview page"</h1>
+<body style="margin-top: 0px;">
+  <section class="coloured-section" id="title">
 
-  <button id="start-camera">Start Camera</button>
-  <video id="video" width="500" height="400" autoplay muted></video>
-  <button id="start-record">Start Recording</button>
-  <button id="stop-record">Stop Recording (and turn off video)</button>
-  <a id="download-video" download="recording.webm">Download Video</a>
-  <script src="scripts/video.js"></script>
+    <div class="container-fluid">
+
+      <!-- Nav Bar -->
+
+      <nav class="navbar navbar-expand-lg navbar-light">
+
+        <a class="navbar-brand" href="index.html"><b>Interview Buddy</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="Interview.html">Interview Prep</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="FAQ.html">FAQ</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+
+      <!-- Title -->
+      <div class="row" style="width: 100%;">
+        <div class="col-lg-6">
+          <h1 class="big-heading">Prepare for every type of interview.</h1>
+          <a class="btn btn-dark btn-lg download-btn" href="#deck" role="button"><i class="fas fa-laptop"></i> Choose Deck</a>
+          <a class="btn btn-dark btn-lg download-btn" href="about.html" role="button"><i class="fas fa-question"></i> Learn More</a>
+        </div>
+        <div class="col-lg-6" style="padding-left: 20px;">
+          <img class="title-image" src="images/test.png" alt="laptop-mockup">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- slidedeck submission -->
+  <section id="deck" style="padding-bottom: 3%; padding-top: 3%">
+
+    <div class="container-fluid white-section" style="
+    padding-top: 5%;
+    padding-bottom: 5%;">
+      <h2 class="section-heading">Choose your Interview Deck</h2>
+
+        <!-- Your name -->
+        <div class="form-group" data-errormsg="">
+          <label for="exampleFormControlTextarea1">Your Name</label>
+          <textarea type="text" name="health_num" class="form-control" id="exampleFormControlTextarea1" placeholder="William McMaster" rows="1"></textarea>
+        </div>
+
+        <!-- Emial -->
+        <div class="form-group" data-errormsg="">
+          <label for="exampleFormControlTextarea1">Email</label>
+          <textarea type="Email" name="health_num" class="form-control" id="exampleFormControlTextarea1" placeholder="william.mcmaster@mcmaster.ca" rows="1"></textarea>
+        </div>
+
+        <!-- Category -->
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Interview Question Deck</label>
+          <select name="category" class="form-control" id="exampleFormControlSelect1">
+            <option>General Interview Questions</option>
+            <option>Situational Questions</option>
+            <option>Coding Technical Questions</option>
+            <option>Financial Technical Questions</option>
+          </select>
+        </div>
+
+        <!-- Checking to see if the person agrees to submitting correct info -->
+        <div class="form-box" data-errormsg="">
+          <label for="input-alive">I allow Interview Buddy to processing my audio and video.</label>
+          <input type="checkbox" id="input-alive" value="yes" tabindex="5" />
+        </div>
+
+        <div class="form-box">
+          <button class="btn btn-dark" id="button-cancel">Cancel</button>
+
+          <!-- Pop-up button for confirmation -->
+          <script type='text/javascript'>
+            function foo() {
+              var user_choice = window.confirm('Are you okay with submitting your question?');
+              if (user_choice == true) {
+                window.location = 'Interview_Video.html'; // you can also use element.submit() if your input type='submit'
+              } else {
+                return false;
+              }
+            }
+          </script>
+
+          <input type="button" class="btn btn-outline-primary" id="button-send" onClick="foo()" value="Submit" href="testing.html">
+
+        </div>
+
+    </div>
+  </section>
+
 </body>
 
 </html>
