@@ -1,4 +1,6 @@
 opencv_python
 cmake
-subprocess
 ffmpeg-python
+scikit-learn
+numpy
+
