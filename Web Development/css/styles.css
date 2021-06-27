@@ -123,13 +123,13 @@ p {
 
 /* images for features */
 .feature-image {
-  color: #CAE4DB;
+  color: #CDAC81;
   width: 100%;
   padding: 10%;
 }
 
 .feature-image:hover {
-  color: #CDAC81;
+  color: #00303F;
 }
 
 /* testimonial section */
