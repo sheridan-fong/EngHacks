@@ -23,9 +23,9 @@ def focus_score(uuid, input_filepath):
         if not _:
             break
         # We get the next frame before sending it to GazeTracking to speed up play back
-        # _, frame = video.read()
-        # if not _:
-        #     break
+        _, frame = video.read()
+        if not _:
+            break
         number_of_frames += 1
 
         # We send this frame to GazeTracking to analyze it

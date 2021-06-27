@@ -54,4 +54,9 @@ class QuestionRandomizer(viewsets.ViewSet):
 
         ### write current question to a txt so we can keep track of the current question ??
 
+        with open(r'C:\Users\bsun7\Desktop\EngHack\COMRADE\data\current_question.txt', 'wb+') as tmp:
+            tmp.write(selection.question)
+
         return Response(serializer.data)
+
+
