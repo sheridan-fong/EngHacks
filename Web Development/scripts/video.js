@@ -20,7 +20,7 @@ start_button.addEventListener('click', function() {
     // set MIME type of recording as video/webm
     media_recorder = new MediaRecorder(camera_stream, { mimeType: 'video/webm' });
 
-    // event : new recorded video blob available 
+    // event : new recorded video blob available
     media_recorder.addEventListener('dataavailable', function(e) {
 		blobs_recorded.push(e.data);
     });
@@ -42,7 +42,7 @@ function stop(stream) {
 }
 
 stop_button.addEventListener('click', function() {
-	media_recorder.stop(); 
+	media_recorder.stop();
     stop(video.srcObject);
 });
 
@@ -67,3 +67,17 @@ submit.addEventListener('click', function() {
         }
     });
 });
+
+// adding in the specific question
+var sample = '{"question":"This is the question"}'
+
+var data_test = JSON.parse(sample)
+
+console.log(data_test)
+
+const app_question = document.getElementById('question_here')
+
+const question = document.createElement('h1')
+question.textContent = data_test["question"]
+
+app_question.appendChild(question)

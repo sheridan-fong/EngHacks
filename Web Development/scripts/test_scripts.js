@@ -26,8 +26,6 @@
 
 var sample = '{"focus_score":20, "focus_feedback":"Strong","content_score":35,"content_feedback": "STUFF", "audio_score":49,"audio_feedback":"THIS ONE MIGHT NOT WORK LMAO"}'
 
-
-
 var data_test = JSON.parse(sample)
 
 console.log(data_test)
