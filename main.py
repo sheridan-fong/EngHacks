@@ -13,6 +13,7 @@ def focus_score(uuid):
 
     output_filepath = fr"C:\Users\bsun7\Desktop\EngHack\COMRADE\data_out\tester.mp4"
 
+    
     input_filepath = os.getcwd() + fr'\data\WEBM\{uuid}.webm'
 
     #Convert webm file to mp4
@@ -73,7 +74,7 @@ def focus_score(uuid):
     if focus_score > 10:
         focus_string = 'Nice! Your focus is great, keep it up!'
     elif focus_score > 8:
-        focus_string = "Good. Try to focus on the camera some more'
+        focus_string = "Good. Try to focus on the camera some more"
     elif focus_score > 5:
         focus_string = "Focus more towards the camera"
     else:
@@ -82,7 +83,6 @@ def focus_score(uuid):
     return {"focus_score": focus_score, focus_feedback:focus_string}
 
 
-print(focus_score("eeasd141f1254561faf", r"C:\Users\bsun7\Desktop\EngHack\COMRADE\data\recording.webm"))
 
 
 def speech_score(uuid):
