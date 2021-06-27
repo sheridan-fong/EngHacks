@@ -1,2 +1,3 @@
 conda install -c conda-forge boost
 conda install -c conda-forge xorg-libx11
+conda install -c conda-forge dlib

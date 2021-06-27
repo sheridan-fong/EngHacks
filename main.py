@@ -4,7 +4,7 @@ from utils.FFMConverter import FFMConverter
 
 def focus_score(uuid, input_filepath):
 
-    output_filepath = fr"C:\Users\bsun7\Desktop\EngHack\FocusCVTracker\data_out\tester.mp4"
+    output_filepath = fr"C:\Users\bsun7\Desktop\EngHack\COMRADE\data_out\tester.mp4"
 
     #Convert webm file to mp4
     ffm = FFMConverter()
@@ -64,7 +64,7 @@ def focus_score(uuid, input_filepath):
     return {"Focus": focus_score}
 
 
-print(focus_score("eeasd141f1254561faf", r"C:\Users\bsun7\Desktop\EngHack\FocusCVTracker\data\recording.webm"))
+print(focus_score("eeasd141f1254561faf", r"C:\Users\bsun7\Desktop\EngHack\COMRADE\data\recording.webm"))
 
 
 def context_score(saved_response_filepath, input_response_filepath):
