@@ -1,6 +1,7 @@
 import cv2
 from gaze_tracking import GazeTracking
 from utils.FFMConverter import FFMConverter
+import os
 
 def focus_score(uuid, input_filepath):
 
@@ -61,32 +62,140 @@ def focus_score(uuid, input_filepath):
 
     focus_score = centered_reads/number_of_frames
 
-    return {"Focus": focus_score}
+    return {"focus_score": focus_score}
 
 
 print(focus_score("eeasd141f1254561faf", r"C:\Users\bsun7\Desktop\EngHack\COMRADE\data\recording.webm"))
 
 
-def context_score(saved_response_filepath, input_response_filepath):
+def speech_score(uuid):
+    mysp = __import__('my-voice-analysis')
+    
+    cwd = os.getcwd()
+    input_filepath = cwd + fr'\data_out\{uuid}.mp4'
+    output_filepath = cwd + fr'\data\WAV\{uuid}.wav'
+
+    ffm = FFMConverter()
+    '''
+    
+    #Uncomment if it needs a file to overwrite to work
+
+    try:
+        with wave.open(output_filepath, 'rb') as file:
+            pass
+        except FileNotFoundError:
+            print('eyo')
+            with wave.open(output_filepath, 'wb') as file:
+                file.setnchannels(2)
+                file.setsampwidth(2)
+                file.setframerate(41000)
+
+    '''           
+    ffm.convert_to_wav(input_filepath, output_filepath)
+
+    p = uuid
+    c = cwd + fr'\data\WAV'
+
+    rating = mysp.myspgend(p,c)
+
+    pauses = mysp.mysppaus(p,c)
+    speed = mysp.myspsr(p,c)
+    articulation = mysp.myspatc(p,c)
+
+    pronounce = mysp.mysppron(p,c)
+    
+    pauses_response = []
+    speed_response = []
+    articulation_response = []
+
+    speed_dict = {
+    '0': [0,'Too Slow'],
+     '1': [25, 'Slow'],
+     '2': [50, 'Slow'],
+     '3': [75, 'Good Speed, could be a bit faster'],
+     '4': [100, 'Perfect Speed'],
+     '5': [75, 'Good speed, could be a little slower'],
+     '6': [50, 'Fast'],
+     '7': [25, 'Fast'],
+     '8': [0, 'Too fast']}
+
+
+    articulation_dict = {
+    '0': [0,'Too Slow'],
+     '1': [0, 'Too Slow'],
+     '2': [25, 'Slow'],
+     '3': [50, 'Slow'],
+     '4': [75, 'Good Articluation, could be a bit faster'],
+     '5': [100, 'Perfect Articluation'],
+     '6': [75, 'Good Articulation, could be a little slower'],
+     '7': [50, 'Fast'],
+     '8': [25, 'Fast'],
+     '9': [0, 'Too fast']}
+
+
+    if pauses > 100:
+        pauses_response = [0, 'Too many pauses']
+    elif pauses > 80:
+        pauses_response = [25, 'Too many pauses']
+    elif pauses > 60:
+        pauses_response = [50, 'Just a few too many pauses']
+
+    elif pauses > 40:
+        pauses_response = [75, 'Good, try to reduce the amount of pauses']
+
+    else:
+        pauses_response = [100, 'Very few pauses, well done!']
+
+    try:
+        speed_response = speed_dict[str(speed)]
+    except KeyError:
+        speed_response = [0, 'Too fast']
+
+    try:
+        articulation_response = articulation_dict[str(articulation)]
+    except KeyError:
+        articluation_response = [0, 'Too fast']
+
+
+    percentages = [pauses_response[0], speed_response[0], articulation_response[0], pronounce]
+
+    mean_percent = sum(percentages)/len(percentages)
+
+    feedback_statement = 'Feedback for Speed: ' + speed_response[1] + ' Feedback for Articulation: ' + articulation_response[1] + ', Feedback for Pausing: ' + pauses_response[1] + ', Pronounce Rating (out of 100): ' + str(pronounce)
+
+    
+    return {'audio_score': mean_percent, 'audio_feedback': feedback_statement}
+    
+
+
+def context_score(saved_response_filepath, uuid):
 #Accepts two txt files containing one or more response
     
     import numpy as np
+    import pandas as pd
     from sklearn.feature_extraction.text import TfidfVectorizer
     from sklearn.metrics.pairwise import cosine_similarity
+    import speech_recognition as sr
+
+    input_filepath = os.getcwd() + fr'\data\WAV\{uuid}.wav'
+
+    recognizer = sr.Recognizer()
+    audio_clip = sr.AudioFile("{}".format(input_filepath))
+
+    with audio_clip as source:
+        audio_file = recognizer.record(source)
+
+    result = recognizer.recognize_google(audio_file)
 
     saved = []
-    answers = []
+    answers = result
 
     with open(saved_response_filepath, 'r') as file:
         lines = file.readlines()
         for line in lines:
             saved.append(line)
         
-
-    with open(input_response_filepath, 'r') as file:
-        lines = file.readlines()
-        for line in lines:
-            answers.append(line)
+    
 
     tfidf = TfidfVectorizer(
         input='content',
@@ -101,6 +210,36 @@ def context_score(saved_response_filepath, input_response_filepath):
 
     cosine_sim = cosine_similarity(answer_matrix, saved_matrix)
 
-    return 100*np.max(cosine_sim)
+    max_cosine_sim = cosine_sim.max()
+
+    se = pd.Series(a.todense().tolist()[0], index=tfidf.get_feature_names())
+
+    largest = [k for k,v in se.nlargest().to_dict().items() if v > 0]
+    smallest = [k for k,v in se.nsmallest().to_dict().items() if v == 0]
+
+    
+    score_list = 'Great job using these words: '
+
+    for item in (largest):
+        if item == largest[-1]:
+            score_list += ('and ' + item + '. ')
+        else:
+            score_list += (item + ', ')
+
+    score_list += 'Try to use some of these words to strenghten your response: '
+    for item in (smallest):
+        if item == smallest[-1]:
+            score_list += ('and ' + item + '. ')
+        else:
+            score_list += (item + ', ')
+
+    percentage = round(200*max_cosine, 2)
+    if percentage > 100:
+        percentage = 100
+
+    print(percentage, score_list)
+
+
+    return {'content_score':percentage, 'content_feedback':score_list}
 
 
