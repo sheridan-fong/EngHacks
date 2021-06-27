@@ -14,7 +14,6 @@
   <!-- linking fonts - ubuntu and monteserrat -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Ubuntu&display=swap" rel="stylesheet">
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-Glyphicons-Halflings.css" rel="stylesheet">
 
   <!-- font-awesome -->
   <script src="https://kit.fontawesome.com/127e963e47.js" crossorigin="anonymous"></script>
@@ -34,7 +33,7 @@
 
       <nav class="navbar navbar-expand-lg navbar-light">
 
-        <a class="navbar-brand" href = "index.html"><b>Interview Buddy</b></a>
+        <a class="navbar-brand" href="index.html"><b>Interview Buddy</b></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -61,9 +60,9 @@
       <!-- Title -->
       <div class="row" style="width: 100%;">
         <div class="col-lg-6">
-          <h1 class="big-heading">Preparing for interviews has never been easier.</h1>
+          <h1 class="big-heading">Have a question or feedback for us? Check out below.</h1>
           <a class="btn btn-dark btn-lg download-btn" href="#faq" role="button"><i class="fas fa-question"></i> FAQ</a>
-          <a class="btn btn-dark btn-lg download-btn" href="about.html" role="button"><i class="fas fa-question"></i> Learn More</a>
+          <a class="btn btn-dark btn-lg download-btn" href="#feedback" role="button"><i class="fas fa-scroll"></i> Submit Feedback</a>
         </div>
         <div class="col-lg-6" style="padding-left: 20px;">
           <img class="title-image" src="images/test.png" alt="laptop-mockup">
@@ -73,81 +72,134 @@
     </div>
   </section>
 
+  <section style="padding-top: 3%">
 
-  <!-- FAQ portion -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.2.0/css/ionicons.min.css" integrity="sha256-F3Xeb7IIFr1QsWD113kV2JXaEbjhsfpgrKkwZFGIA4E=" crossorigin="anonymous" />
+    <!-- FAQ portion -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.2.0/css/ionicons.min.css" integrity="sha256-F3Xeb7IIFr1QsWD113kV2JXaEbjhsfpgrKkwZFGIA4E=" crossorigin="anonymous" />
 
-  <div class="container-fluid" id="faq">
-    <!-- Row -->
-    <div class="col-xl">
-      <div class="card card-lg">
-        <h3 class="card-header border-bottom-0">
-          Terms and Conditions
-        </h3>
-        <div class="accordion accordion-type-2 accordion-flush" id="accordion_2">
-          <div class="card">
-            <div class="card-header d-flex justify-content-between activestate">
-              <a role="button" data-toggle="collapse" href="#collapse_1i" aria-expanded="true">The Intellectual Property</a>
+    <div class="container-fluid" id="faq">
+      <!-- Row -->
+      <div class="col-xl">
+        <div class="card card-lg">
+          <h3 class="card-header border-bottom-0">
+            FAQ
+          </h3>
+          <div class="accordion accordion-type-2 accordion-flush" id="accordion_2">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between activestate">
+                <a role="button" data-toggle="collapse" href="#collapse_1i" aria-expanded="true">Why was this program created?</a>
+              </div>
+              <div id="collapse_1i" class="collapse show" data-parent="#accordion_2" role="tabpanel">
+                <div class="card-body pa-15">This program was created for students by students. Our goal is to help you perfect your interview skills so you can land the job of your dreams. </div>
+              </div>
             </div>
-            <div id="collapse_1i" class="collapse show" data-parent="#accordion_2" role="tabpanel">
-              <div class="card-body pa-15">The Intellectual Property disclosure will inform users that the contents, logo and other visual media you created is your property and is protected by copyright laws.</div>
+            <div class="card">
+              <div class="card-header d-flex justify-content-between">
+                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse_2i" aria-expanded="false">Where does the video go after I do a mock interview?</a>
+              </div>
+              <div id="collapse_2i" class="collapse" data-parent="#accordion_2">
+                <div class="card-body pa-15">Your interview video is analyzed by a machine learning process. After analyzation your video is permenantly deleted from the server.</div>
+              </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-header d-flex justify-content-between">
-              <a class="collapsed" role="button" data-toggle="collapse" href="#collapse_2i" aria-expanded="false">Termination clause</a>
+            <div class="card">
+              <div class="card-header d-flex justify-content-between">
+                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse_3i" aria-expanded="false">I don't see an interview deck that interests me... how do I suggest one?</a>
+              </div>
+              <div id="collapse_3i" class="collapse" data-parent="#accordion_2">
+                <div class="card-body pa-15">If you feel like we're missing an interview deck that could benefit you and other students please submit the feedback form below. Include any necessary information you think is important such as the position and even the job description
+                </div>
+              </div>
             </div>
-            <div id="collapse_2i" class="collapse" data-parent="#accordion_2">
-              <div class="card-body pa-15">A Termination clause will inform that users’ accounts on your website and mobile app or users’ access to your website and mobile (if users can’t have an account with you) can be terminated in case of
-                abuses or at your sole discretion.</div>
+            <div class="card">
+              <div class="card-header d-flex justify-content-between">
+                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse_4i" aria-expanded="false">How early should I be preparing for an interview?</a>
+              </div>
+              <div id="collapse_4i" class="collapse" data-parent="#accordion_2">
+                <div class="card-body pa-15">It's never to early or to late to start preparing for an interview! You've made the right choice by coming to interview buddy. We suggest practicing for an interview as far ahead in advance as possible. There's never a wrong time to start practicing.</div>
+              </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-header d-flex justify-content-between">
-              <a class="collapsed" role="button" data-toggle="collapse" href="#collapse_3i" aria-expanded="false">Governing Law</a>
-            </div>
-            <div id="collapse_3i" class="collapse" data-parent="#accordion_2">
-              <div class="card-body pa-15">A Governing Law will inform users which laws govern the agreement. This should the country in which your company is headquartered or the country from which you operate your website and mobile app.
+            <div class="card">
+              <div class="card-header d-flex justify-content-between">
+                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse_5i" aria-expanded="false">Who are the creators of this platform?</a>
+              </div>
+              <div id="collapse_5i" class="collapse" data-parent="#accordion_2">
+                <div class="card-body pa-15">This platform was created by four biomedical engineers from McMaster University: Benjamin Sun, Ishan Vermani, Sharon Cai and Sheridan Fong</div>
               </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-header d-flex justify-content-between">
-              <a class="collapsed" role="button" data-toggle="collapse" href="#collapse_4i" aria-expanded="false">Limit what users can do</a>
-            </div>
-            <div id="collapse_4i" class="collapse" data-parent="#accordion_2">
-              <div class="card-body pa-15">A Limit What Users Can Do clause can inform users that by agreeing to use your service, they’re also agreeing to not do certain things. This can be part of a very long and thorough list in your Terms
-                and Conditions agreements so as to encompass the most amount of negative uses.</div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header d-flex justify-content-between">
-              <a class="collapsed" role="button" data-toggle="collapse" href="#collapse_5i" aria-expanded="false">Limitation of liability of your products</a>
-            </div>
-            <div id="collapse_5i" class="collapse" data-parent="#accordion_2">
-              <div class="card-body pa-15">No matter what kind of goods you sell, best practices direct you to present any warranties you are disclaiming and liabilities you are limiting in a way that your customers will notice.</div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header d-flex justify-content-between">
-              <a class="collapsed" role="button" data-toggle="collapse" href="#collapse_6i" aria-expanded="false">How to enforce Terms and Conditions</a>
-            </div>
-            <div id="collapse_6i" class="collapse" data-parent="#accordion_2">
-              <div class="card-body pa-15">While creating and having a Terms and Conditions is important, it’s far more important to understand how you can make the Terms and Conditions enforceable. You should always use clickwrap to get
-                users to agree to your Terms and Conditions. Clickwrap is when you make your users take some action – typically clicking something – to show they’re agreeing. Here’s how Engine Yard uses the clickwrap agreement with the I
-                agree check box:</div>
-            </div>
-          </div>
-        </div>
 
+        </div>
       </div>
     </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  <!-- /Row -->
-  </div>
+  </section>
+
+  <!-- Question submission portion -->
+
+  <section id="feedback" style="padding-bottom: 3%; padding-top: 3%">
+
+    <div class="container-fluid coloured-section" style="
+    padding-top: 5%;
+    padding-bottom: 5%;">
+      <h2 class="section-heading">Submit Feedback</h2>
+
+        <!-- Your name -->
+        <div class="form-group" data-errormsg="">
+          <label for="exampleFormControlTextarea1">Your Name</label>
+          <textarea type="text" name="health_num" class="form-control" id="exampleFormControlTextarea1" placeholder="William McMaster" rows="1"></textarea>
+        </div>
+
+        <!-- Emial -->
+        <div class="form-group" data-errormsg="">
+          <label for="exampleFormControlTextarea1">Email</label>
+          <textarea type="Email" name="health_num" class="form-control" id="exampleFormControlTextarea1" placeholder="william.mcmaster@mcmaster.ca" rows="1"></textarea>
+        </div>
+
+        <!-- Category -->
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Type of Submission</label>
+          <select name="category" class="form-control" id="exampleFormControlSelect1">
+            <option>Question</option>
+            <option>Suggestions</option>
+            <option>Report</option>
+          </select>
+        </div>
+
+        <!-- Update textarea -->
+        <div class="form-group" data-errormsg="">
+          <label for="exampleFormControlTextarea1">Submission</label>
+          <textarea name="notes" type="text" class="form-control" id="exampleFormControlTextarea1" placeholder="I think you should have an interview slide deck for technical financial interviews..." rows="3"></textarea>
+        </div>
+
+        <!-- Checking to see if the person agrees to submitting correct info -->
+        <div class="form-box" data-errormsg="">
+          <label for="input-alive">I confirm I am a human</label>
+          <input type="checkbox" id="input-alive" value="yes" tabindex="5" />
+        </div>
+
+        <div class="form-box">
+          <button class="btn btn-dark" id="button-cancel">Cancel</button>
+
+          <!-- Pop-up button for confirmation -->
+          <script type='text/javascript'>
+            function foo() {
+              var user_choice = window.confirm('Are you okay with submitting your question?');
+              if (user_choice == true) {
+                window.location = 'FAQ.html'; // you can also use element.submit() if your input type='submit'
+              } else {
+                return false;
+              }
+            }
+          </script>
+
+
+          <input type="button" class="btn btn-outline-primary" id="button-send" onClick="foo()" value="Submit" href="testing.html">
+
+        </div>
+
+    </div>
+  </section>
+
+
 </body>
 
 </html>
