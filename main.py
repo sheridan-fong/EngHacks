@@ -3,9 +3,17 @@ from gaze_tracking import GazeTracking
 from utils.FFMConverter import FFMConverter
 import os
 
-def focus_score(uuid, input_filepath):
+
+def get_uuid(uuid_filepath):
+    with open(uuid_filepath, 'r') as uuid_file:
+        return uuid_file.readlines()[0]
+
+
+def focus_score(uuid):
 
     output_filepath = fr"C:\Users\bsun7\Desktop\EngHack\COMRADE\data_out\tester.mp4"
+
+    input_filepath = os.getcwd() + fr'\data\WEBM\{uuid}.webm'
 
     #Convert webm file to mp4
     ffm = FFMConverter()
@@ -61,8 +69,17 @@ def focus_score(uuid, input_filepath):
             break
 
     focus_score = centered_reads/number_of_frames
+    focus_string = ""
+    if focus_score > 10:
+        focus_string = 'Nice! Your focus is great, keep it up!'
+    elif focus_score > 8:
+        focus_string = "Good. Try to focus on the camera some more'
+    elif focus_score > 5:
+        focus_string = "Focus more towards the camera"
+    else:
+        focus_string = "Poor Focus. Spend more time looking and engaging with the camera then your surroundings"
 
-    return {"focus_score": focus_score}
+    return {"focus_score": focus_score, focus_feedback:focus_string}
 
 
 print(focus_score("eeasd141f1254561faf", r"C:\Users\bsun7\Desktop\EngHack\COMRADE\data\recording.webm"))
@@ -168,7 +185,7 @@ def speech_score(uuid):
     
 
 
-def context_score(saved_response_filepath, uuid):
+def context_score(uuid):
 #Accepts two txt files containing one or more response
     
     import numpy as np
@@ -178,6 +195,18 @@ def context_score(saved_response_filepath, uuid):
     import speech_recognition as sr
 
     input_filepath = os.getcwd() + fr'\data\WAV\{uuid}.wav'
+
+    current_question_filepath = os.getcwd() + fr'\data\current_question.txt'
+
+    current_question = ""
+
+    saved_response_filepath = current_question_filepath
+
+
+    with open(current_question_filepath, 'r') as question_file:
+        current_question = question_file.readlines()[1]
+
+        
 
     recognizer = sr.Recognizer()
     audio_clip = sr.AudioFile("{}".format(input_filepath))
@@ -237,9 +266,24 @@ def context_score(saved_response_filepath, uuid):
     if percentage > 100:
         percentage = 100
 
-    print(percentage, score_list)
-
 
     return {'content_score':percentage, 'content_feedback':score_list}
 
+
+uuid_filepath = os.getcwd() + fr'\data\current_question.txt'
+uuid = get_uuid(uuid_filepath)
+
+
+json_dict = {}
+
+focus_dict = focus_score(uuid)
+json_dict.update(focus_dict)
+
+speech_dict = speech_score(uuid)
+json_dict.update(speech_dict)
+
+context_dict = context_score(uuid)
+json_dict.update(context_dict)
+
+print(json_dict)
 
