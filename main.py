@@ -1,9 +1,16 @@
 import cv2
 from gaze_tracking import GazeTracking
+from utils.FFMConverter import FFMConverter
 
-def focus_score(filepath):
+def focus_score(uuid, input_filepath):
+
+    output_filepath = fr"C:\Users\bsun7\Desktop\EngHack\FocusCVTracker\data_out\tester.mp4"
+
+    #Convert webm file to mp4
+    ffm = FFMConverter()
+    ffm.convert_to_mp4(input_filepath, output_filepath)
     gaze = GazeTracking()
-    video = cv2.VideoCapture(filepath)
+    video = cv2.VideoCapture(output_filepath)
 
 
     #Scoring Metric Criteria
@@ -16,9 +23,9 @@ def focus_score(filepath):
         if not _:
             break
         # We get the next frame before sending it to GazeTracking to speed up play back
-        _, frame = video.read()
-        if not _:
-            break
+        # _, frame = video.read()
+        # if not _:
+        #     break
         number_of_frames += 1
 
         # We send this frame to GazeTracking to analyze it
@@ -30,6 +37,7 @@ def focus_score(filepath):
 
         if gaze.is_blinking():
             text = "Blinking"
+            number_of_frames -= 1
         elif gaze.is_right():
             text = "Looking right"
         elif gaze.is_left():
@@ -52,3 +60,7 @@ def focus_score(filepath):
             break
 
     focus_score = centered_reads/number_of_frames
+    return {"Focus": focus_score}
+
+
+print(focus_score("eeasd141f1254561faf", r"C:\Users\bsun7\Desktop\EngHack\FocusCVTracker\data\recording.webm"))
