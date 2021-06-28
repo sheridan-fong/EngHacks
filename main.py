@@ -12,10 +12,10 @@ def get_uuid(uuid_filepath):
 
 def focus_score(uuid):
 
-    output_filepath = fr"C:\Users\bsun7\Desktop\EngHack\COMRADE\data_out\{uuid}.mp4"
+    output_filepath = fr"C~\data_out\{uuid}.mp4"
 
 
-    input_filepath = r'C:\Users\bsun7\Desktop\EngHack\COMRADE' + fr'\data\WEBM\{uuid}.webm'
+    input_filepath = fr'~\data\WEBM\{uuid}.webm'
 
     #Convert webm file to mp4
     ffm = FFMConverter()
@@ -37,6 +37,8 @@ def focus_score(uuid):
         _, frame = video.read()
         if not _:
             break
+
+
         number_of_frames += 1
 
         # We send this frame to GazeTracking to analyze it
@@ -70,7 +72,7 @@ def focus_score(uuid):
         if cv2.waitKey(1) == 27:
             break
 
-    focus_score = centered_reads/number_of_frames *10
+    focus_score = centered_reads/number_of_frames
     focus_string = ""
     if focus_score > 10:
         focus_string = 'Nice! Your focus is great, keep it up!'
@@ -89,7 +91,7 @@ def focus_score(uuid):
 def speech_score(uuid):
     mysp = __import__('my-voice-analysis')
 
-    cwd = r'C:\Users\bsun7\Desktop\EngHack\COMRADE'
+    cwd = ""
     input_filepath = cwd + fr'\data_out\{uuid}.mp4'
     output_filepath = cwd + fr'\data\WAV\{uuid}.wav'
 
@@ -199,10 +201,10 @@ def context_score(uuid):
     from sklearn.metrics.pairwise import cosine_similarity
     import speech_recognition as sr
 
-    input_filepath = r'C:\Users\bsun7\Desktop\EngHack\COMRADE' + fr'\data\WAV\{uuid}.wav'
+    input_filepath = fr'\data\WAV\{uuid}.wav'
 
-    current_question_filepath = r'C:\Users\bsun7\Desktop\EngHack\COMRADE' + fr'\data\current_question.txt'
-    question_csv_filepath = r'C:\Users\bsun7\Desktop\EngHack\COMRADE' + fr'\data\question_matrix.csv'
+    current_question_filepath = fr'\data\current_question.txt'
+    question_csv_filepath = fr'\data\question_matrix.csv'
 
     question_series = pd.read_csv(question_csv_filepath, squeeze=True, index_col = 0, header = 0)
 
@@ -211,7 +213,7 @@ def context_score(uuid):
 
         current_question = index_file.readlines()[0].rstrip("\n")
 
-    responses_filepath = r"C:\Users\bsun7\Desktop\EngHack\COMRADE\data" + question_series[current_question]
+    responses_filepath = r"\data" + question_series[current_question]
 
 
 
@@ -278,7 +280,7 @@ def context_score(uuid):
     return {'content_score':percentage, 'content_feedback':score_list}
 
 
-uuid_filepath = r'C:\Users\bsun7\Desktop\EngHack\COMRADE\data\current_question.txt'
+uuid_filepath = r'\data\current_question.txt'
 uuid = get_uuid(uuid_filepath)
 
 
@@ -293,5 +295,5 @@ json_dict.update(speech_dict)
 context_dict = context_score(uuid)
 json_dict.update(context_dict)
 
-print("\n\n\n\n\n\n\n\n", json_dict)
+print(json_dict)
 

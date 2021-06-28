@@ -22,7 +22,7 @@ client.get('localhost:8000/api/results', function(response) {
 
 // Grabbing the data and outputting it to the screen
 
-var sample = '{"focus_score":20, "focus_feedback":"Poor Focus. Spend more time looking and engaging with the camera then your surroundings","content_score":35,"content_feedback": "You used a lot of great words such as collaboration, teamwork and responsibility. Try using more words like enthusiastic", "audio_score":49,"audio_feedback":"You had great pronounciation and pace."}'
+var sample = '{"focus_score":20, "focus_feedback":"Poor Focus. Spend more time looking and engaging with the camera then your surroundings","content_score":35,"content_feedback": "You used a lot of great words such as collaboration, teamwork and responsibility. Try using more words like initiative.", "audio_score":49,"audio_feedback":"You had okay pronounciation but your pace was too fast."}'
 
 var data_test = JSON.parse(sample) // prior was sample (response should be where the current json data is)
 
